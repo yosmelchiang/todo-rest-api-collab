@@ -59,8 +59,8 @@ router.delete("/:id", (req, res) => {
     return res.status(404).json({ status: "fail", message: "Todo not found" });
   }
 
-  //If we get here, means we have a todo, delete it from a database and confirm
-  const db = dummyDB.filter((e) => e.id !== id); //supposed to simulate a database deletion
+  //   //If we get here, means we have a todo, delete it from a database and confirm
+  //   const db = dummyDB.filter((e) => e.id !== id); //supposed to simulate a database deletion
 
   res
     .status(200)

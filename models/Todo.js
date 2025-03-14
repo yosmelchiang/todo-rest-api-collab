@@ -42,5 +42,7 @@ const Todo = db.define("Todo", {
   name: { type: DataTypes.STRING, allowNull: false },
   deadline: { type: DataTypes.DATE, allowNull: false },
   points: { type: DataTypes.INTEGER, allowNull: false },
+}, {
+    timestamps: false
 });
 module.exports = Todo;

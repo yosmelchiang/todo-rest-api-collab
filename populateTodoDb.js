@@ -1,4 +1,4 @@
-const { sequelize, Todo } = require("./model"); // Import models
+const { sequelize, Todo } = require("./models/Todo.js"); // Import models
 require("dotenv").config();
 
 const populateDB = async () => {

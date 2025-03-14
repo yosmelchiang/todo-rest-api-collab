@@ -2,6 +2,41 @@ openapi: 3.0.0
 info:
   title: 'Todo API'
   version: 1.0.0
+  description: |
+    A simple api that allows for CRUD operations on a mysql database using sequelize, express, jwt authorization and swagger documentation.
+
+    ### GET
+    Retrieves a list of record from the database
+
+    #### Exmple
+    ```json    
+    [
+    {
+      "...":"..."
+    },
+    {
+      "...":"..."
+    },
+    {
+      "...":"..."
+    },
+    ]
+    ```
+    ### POST
+    Creates a new entry to the database, accepts application/json
+
+    #### Exmple
+    ```json
+    {
+      "name":"Walk the dog",
+      "deadline":"2025-04-05",
+      "points":1234
+    }
+    ```
+    ### GET {id}
+    Gets a single record from the database by provided ID
+    ### DELETE {id}
+    Deletes a single record from the database by provided ID
 
 paths:
   /todo:

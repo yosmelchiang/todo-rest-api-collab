@@ -40,7 +40,7 @@ require("dotenv").config();
 const Todo = db.define("Todo", {
   id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: DataTypes.STRING, allowNull: false },
-  deadline: { type: DataTypes.DATE, allowNull: false },
+  deadline: { type: DataTypes.DATEONLY, allowNull: false },
   points: { type: DataTypes.INTEGER, allowNull: false },
 }, {
     timestamps: false

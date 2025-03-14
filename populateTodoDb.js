@@ -16,7 +16,7 @@ const populateDB = async () => {
     ]);
 
     console.log("Database populated successfully!");
-    await sequelize.close();
+  
   } catch (error) {
     console.error("Error inserting data:", error);
   }

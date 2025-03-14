@@ -1,0 +1,73 @@
+openapi: 3.0.0
+info:
+  title: 'Todo API'
+  version: 1.0.0
+
+paths:
+  /todo:
+    get:
+      tags:
+        - Todos
+      summary: Get all todos
+      description: Retrieve all todos from database
+      content:
+        application/json:
+          type: array
+          items:
+            $ref: '#/components/schemas/Todo'
+      responses:
+        "200":
+          description: Retrieved all todos
+        "400":
+          description: Could not retrieve todos
+    post:
+      tags:
+        - Todos
+      summary: Create a new todo
+      description: Create a new todo record to the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTodo'          
+      responses:
+        "201":
+          description: Successfully created a new todo
+        "401":
+          description: Unauthorized
+  # /todo/{id}:
+  #   get:
+  #   delete:
+
+
+
+components:
+  schemas:
+    Todo:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        name:
+          type: string
+          example: 'Walk the dog'
+        deadline:
+          type: date
+          example: '2025-03-14'
+        points:
+          type: integer
+          example: '123123'
+    CreateTodo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: 'Walk the dog'
+        deadline:
+          type: date
+          example: '2025-03-14'
+        points:
+          type: integer
+          example: '123123'

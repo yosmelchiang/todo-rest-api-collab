@@ -9,6 +9,11 @@ const PORT = process.env.PORT || 3000;
 const SECRET = process.env.SECRET_KEY;
 const jwt = require("jsonwebtoken");
 
+const swagger = require('swagger-ui-express')
+const openapi = require('yamljs').load('./openapi.yaml')
+
+app.use('/docs', swagger.serve, swagger.setup(openapi))
+
 app.use(express.json()); //Parse JSON bodies
 app.use("/todo", todoRouter); //We only have 1 main endpoint, so we set up a router to avoid repeating ourselves.
 

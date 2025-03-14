@@ -20,10 +20,17 @@ router.get('/:id', (req, res) => {
   const id = Number(req.params.id); //its a string, we need to convert it to a number
   const todo = dummyDB.find((e) => e.id === id);
 
-  todo ? res.status(200).json({ status: 'success', message: 'Retrieved a single todo', data: todo }) : res.status(404).json({ status: 'fail', message: 'Todo not found' })
+  todo
+    ? res.status(200).json({ status: 'success', message: 'Retrieved a single todo', data: todo })
+    : res.status(404).json({ status: 'fail', message: 'Todo not found' });
 });
 
-// router.post
+router.post('/', (req, res) => {
+  const todo = req.body;
+
+  res.status(201).json({ status: 'succes', message: 'Created a new todo', data: todo });
+});
+
 // router.delete
 
 app.listen(PORT, () => {

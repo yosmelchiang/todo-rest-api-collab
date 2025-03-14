@@ -45,6 +45,8 @@ paths:
         - Todos
       summary: Get all todos
       description: Retrieve all todos from database
+      security:
+        - BearerAuth: []
       content:
         application/json:
           type: array
@@ -60,6 +62,8 @@ paths:
         - Todos
       summary: Create a new todo
       description: Create a new todo record to the database
+      security:
+        - BearerAuth: []
       requestBody:
         required: true
         content:
@@ -77,6 +81,8 @@ paths:
         - Todos
       summary: Get a single todo by id
       description: Retrieve a single todo from the database
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: id
@@ -95,6 +101,8 @@ paths:
         - Todos
       summary: Delete a single todo by id
       description: Delete a todo record from the database
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: id
@@ -110,6 +118,11 @@ paths:
           description: Todo not found
 
 components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     Todo:
       type: object

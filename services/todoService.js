@@ -12,6 +12,10 @@ const getTodo = async (req, res) => {
 
 // Creates a new TODO item
 const createTodo = async (req, res) => {
+    /**
+     * 
+     * 
+     */
     const { name, deadline, points } = req.body;
     try {
         const newTodo = await Todo.create({ name, deadline, points });
@@ -24,7 +28,7 @@ const createTodo = async (req, res) => {
 // Deletes a TODO item by ID 
 const deleteTodo = async (req, res) => {
     await Todo.destroy({ where: { id: req.params.id} });
-    res.json({ message: 'Deleted successfully' });
+    res.status(204).json({ message: 'Deleted successfully' });
 
 };
 

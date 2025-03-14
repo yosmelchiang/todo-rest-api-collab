@@ -36,11 +36,43 @@ paths:
           description: Successfully created a new todo
         "401":
           description: Unauthorized
-  # /todo/{id}:
-  #   get:
-  #   delete:
-
-
+  /todo/{id}:
+    get:
+      tags:
+        - Todos
+      summary: Get a single todo by id
+      description: Retrieve a single todo from the database
+      parameters:
+        - in: path
+          name: id
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Todo'
+      responses:
+        "200":
+          description: Successfully retrieved a todo
+        "404":
+          description: Todo not found
+    delete:
+      tags:
+        - Todos
+      summary: Delete a single todo by id
+      description: Delete a todo record from the database
+      parameters:
+        - in: path
+          name: id
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Todo'
+      responses:
+        "204":
+          description: No content
+        "404":
+          description: Todo not found
 
 components:
   schemas:

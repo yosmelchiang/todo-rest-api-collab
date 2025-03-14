@@ -22,4 +22,4 @@ const populateDB = async () => {
   }
 };
 
-module.exports = populateDB();
+module.exports = populateDB;

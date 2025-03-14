@@ -1,17 +1,17 @@
 const Todo = require('../models/Todo');
 
 // Retrieve all TODO items 
-exports.getTodos = async (req, res) => res.json(await Todo.findAll());
+const getTodos = async (req, res) => res.json(await Todo.findAll());
 
 // Retrieve a single TODO item by ID
-exports.getTodo = async (req, res) => {
+const getTodo = async (req, res) => {
     const todo = await Todo.findByPk(req.params.id);
     if (!todo) return res.status(404).json({ message: 'Not found' });
     res.json(todo);
 };
 
 // Creates a new TODO item
-exports.createTodo = async (req, res) => {
+const createTodo = async (req, res) => {
     const { name, deadline, points } = req.body;
     try {
         const newTodo = await Todo.create({ name, deadline, points });
@@ -22,7 +22,7 @@ exports.createTodo = async (req, res) => {
 };
 
 // Deletes a TODO item by ID 
-exports.deleteTodo = async (req, res) => {
+const deleteTodo = async (req, res) => {
     await Todo.destroy({ where: { id: req.params.id} });
     res.json({ message: 'Deleted successfully' });
 

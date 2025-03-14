@@ -1,5 +1,4 @@
-// Models
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize"); // Add DataTypes import
 require("dotenv").config();
 
 const sequelize = new Sequelize(
@@ -43,4 +42,4 @@ const Todo = sequelize.define(
   }
 );
 
-module.exports = Todo;
+module.exports = { sequelize, Todo }; // Export sequelize for initialization

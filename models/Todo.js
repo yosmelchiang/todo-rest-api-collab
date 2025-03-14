@@ -34,13 +34,13 @@
 
 // module.exports = { sequelize, Todo }; // Export sequelize for initialization
 
-
-const { DataTypes } = require('sequelize');
-const db = require('../config/db');
-const Todo = db.define('Todo', {
-    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    name: { type: DataTypes.STRING, allowNull: false },
-    deadline: { type: DataTypes.DATE, allowNull: false },
-    points: { type: DataTypes.INTEGER, allowNull: false }
+const { Sequelize, DataTypes } = require("sequelize"); // Add DataTypes import
+const db = require("../config/db");
+require("dotenv").config();
+const Todo = db.define("Todo", {
+  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+  name: { type: DataTypes.STRING, allowNull: false },
+  deadline: { type: DataTypes.DATE, allowNull: false },
+  points: { type: DataTypes.INTEGER, allowNull: false },
 });
 module.exports = Todo;

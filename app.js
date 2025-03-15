@@ -17,8 +17,6 @@ app.use('/todo', todoRouter); //We only have 1 main endpoint, so we set up a rou
 
 app.get('/', (req, res) => res.redirect('/docs')); //Our main endpoint is not being used, redirect straight to /docs
 
-populateDB();
-
 // Login route for generating JWT
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
@@ -32,6 +30,15 @@ app.post('/login', (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+
+//Custom error handler
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(err.status || 500).json({
+    message: err.message || 'Internal Server Error',
+    error: err.errors || null
+  })
+})
+populateDB().then(app.listen(PORT, () => {
   console.log(`App is up on http://localhost:${PORT}`);
-});
+}));

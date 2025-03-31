@@ -1,0 +1,201 @@
+openapi: 3.1.1
+info:
+  title: 'Todo API'
+  version: 1.0.0
+  description: |
+    A simple api that allows for CRUD operations on a mysql database using sequelize, express, jwt authorization and swagger documentation.
+
+    ### Authentication
+    A JWT token is generated when you log in with your username and password at the `/login` endpoint. This token is required to access all CRUD endpoints.
+    - To obtain the token, send a `POST` request to `/login` with the username and password.
+    - Use the received JWT token in the `Authorization` header for subsequent requests to protected routes.
+
+    ```json
+    {
+      "username":"sys",
+      "password":"password123"
+    }
+    ```
+
+    ### GET
+    Retrieves a list of record from the database
+
+    #### Response example
+    ```json    
+    [
+    {
+      "...":"..."
+    },
+    {
+      "...":"..."
+    }...
+    ]
+    ```
+    ### POST
+    Creates a new entry to the database, accepts application/json
+
+    #### Request body example
+    ```json
+    {
+      "name":"Walk the dog",
+      "deadline":"2025-04-05",
+      "points":1234
+    }
+    ```
+    ### GET {id}
+    Gets a single record from the database by provided ID
+    ### DELETE {id}
+    Deletes a single record from the database by provided ID
+
+paths:
+  /login:
+      post:
+        tags:
+          - Authentication
+        summary: Login to get a JWT token
+        description: Authenticates the user and returns a JWT token for further requests.
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: "sys"
+                  password:
+                    type: string
+                    example: "password123"
+        responses:
+          '200':
+            description: Successfully logged in and received a JWT token
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    token:
+                      type: string
+                      example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoic3lzIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjExNjM3MDE1fQ.VcLfWQLwz4ug50giTY1bM3l9qjAUEkTvsksLfXrD2o0"
+          '401':
+            description: Invalid username or password
+          '500':
+            description: Internal server error
+  /todo:
+    get:
+      tags:
+        - Todos
+      summary: Get all todos
+      description: Retrieve all todos from database
+      security:
+        - BearerAuth: []
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Todo'
+      responses:
+        '200':
+          description: Retrieved all todos
+        '400':
+          description: Could not retrieve todos
+    post:
+      tags:
+        - Todos
+      summary: Create a new todo
+      description: Create a new todo record to the database
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTodo'
+      responses:
+        '201':
+          description: Successfully created a new todo
+        '401':
+          description: Unauthorized
+  /todo/{id}:
+    get:
+      tags:
+        - Todos
+      summary: Get a single todo by id
+      description: Retrieve a single todo from the database
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Todo'
+      responses:
+        '200':
+          description: Successfully retrieved a todo
+        '404':
+          description: Todo not found
+    delete:
+      tags:
+        - Todos
+      summary: Delete a single todo by id
+      description: Delete a todo record from the database
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Todo'
+      responses:
+        '204':
+          description: No content
+        '404':
+          description: Todo not found
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Todo:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        name:
+          type: string
+          example: 'Walk the dog'
+        deadline:
+          type: date
+          example: '2025-03-14'
+        points:
+          type: integer
+          example: '123123'
+    CreateTodo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: 'Walk the dog'
+        deadline:
+          type: date
+          example: '2025-03-14'
+        points:
+          type: integer
+          example: '123123'

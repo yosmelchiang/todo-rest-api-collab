@@ -37,10 +37,11 @@ Basic TODO list API with JWT authentication.
 
 ## Dependencies
 
--   `express`: Web framework.
--   `sequelize`: ORM for database interaction.
--   `mysql2`: MySQL client for Node.js.
--   `jsonwebtoken`: JWT for authentication.
--   `dotenv`: Loads environment variables from a `.env` file.
--   `swagger-ui-express`: Serves Swagger UI.
--   `swagger-jsdoc`: Generates Swagger documentation.
+-   `express` ^4.21.2: Web framework.
+-   `sequelize` ^6.37.6: ORM for database interaction.
+-   `mysql2` ^3.13.0: MySQL client for Node.js.
+-   `jsonwebtoken` ^9.0.2: JWT for authentication.
+-   `dotenv` ^16.4.7: Loads environment variables from a `.env` file.
+-   `swagger-ui-express` ^5.0.1: Serves Swagger UI.
+-   `swagger-jsdoc` ^6.2.8: Generates Swagger documentation.
+-   `yamljs` ^0.3.0: Parses YAML files.
